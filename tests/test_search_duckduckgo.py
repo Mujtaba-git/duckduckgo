@@ -1,9 +1,14 @@
 import pytest
-from pages.search_page import SearchPage
-from pages.result_page import ResultPage
-
+from selenium import webdriver
+from search_page import SearchPage
+from result_page import ResultPage
 
 class TestSearchDuckDuckGo:
+    @pytest.fixture(scope="class")
+    def driver(self):
+        with webdriver.Firefox() as driver:
+            yield driver
+
     @pytest.mark.parametrize("query", ["Python", "Selenium", "Pytest"])
     def test_search_query(self, driver, query):
         search_page = SearchPage(driver)
@@ -12,7 +17,7 @@ class TestSearchDuckDuckGo:
         search_page.load()
         search_page.search(query)
 
-        for result in result_page.link_results():
+        for result in result_page.result_titles():
             assert query.lower() in result.text.lower()
 
     def test_no_results(self, driver):
@@ -22,7 +27,7 @@ class TestSearchDuckDuckGo:
         search_page.load()
         search_page.search("asdasdasdqwertyyui")
 
-        assert len(result_page.link_results()) == 0
+        assert len(result_page.result_titles()) == 0
 
     def test_page_navigation(self, driver):
         search_page = SearchPage(driver)
@@ -32,5 +37,27 @@ class TestSearchDuckDuckGo:
         search_page.search("Python")
 
         for _ in range(3):
-            result_page.navigate_to_next_page()
-            assert len(result_page.link_results()) > 0
+            result_page.next_page()
+            assert len(result_page.result_titles()) > 0
+
+    def test_search_bar_on_result_page(self, driver):
+        search_page = SearchPage(driver)
+        result_page = ResultPage(driver)
+
+        search_page.load()
+        search_page.search("Python")
+        result_page.search("Selenium")
+
+        for result in result_page.link_results():
+            assert "selenium" in result.text.lower()
+
+    def test_result_titles(self, driver):
+        search_page = SearchPage(driver)
+        result_page = ResultPage(driver)
+
+        search_page.load()
+        search_page.search("Python")
+
+        for result in result_page.result_titles():
+            assert len(result.text.strip()) > 0
+
