@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+        PYTHONPATH = ".;pages"
+        }
     agent any
 
     stages {
