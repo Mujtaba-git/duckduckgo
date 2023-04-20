@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
-from search_page import SearchPage
-from result_page import ResultPage
+from pages.search_page import SearchPage
+from pages.result_page import ResultPage
 
 class TestSearchDuckDuckGo:
     @pytest.fixture(scope="class")
