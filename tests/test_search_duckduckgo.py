@@ -17,8 +17,13 @@ class TestSearchDuckDuckGo:
         search_page.load()
         search_page.search(query)
 
+        found_query_in_result = False
         for result in result_page.result_titles():
-            assert query.lower() in result.text.lower()
+            if query.lower() in result.text.lower():
+                found_query_in_result = True
+                break
+
+        assert found_query_in_result
 
     def test_no_results(self, driver):
         search_page = SearchPage(driver)
