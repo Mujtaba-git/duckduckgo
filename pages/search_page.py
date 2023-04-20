@@ -4,8 +4,8 @@ from .base_page import BasePage
 
 class SearchPage(BasePage):
     URL = "https://duckduckgo.com/"
-    SEARCH_INPUT = (By.ID, "search_form_input_homepage")
-    SEARCH_BUTTON = (By.ID, "search_button_homepage")
+    SEARCH_INPUT = (By.ID, "searchbox_input")
+    SEARCH_BUTTON = (By.TYPE, "submit")
 
     def load(self):
         self.driver.get(self.URL)
