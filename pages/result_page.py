@@ -4,7 +4,7 @@ from .base_page import BasePage
 
 class ResultPage(BasePage):
     #RESULT_LINKS = (By.CSS_SELECTOR, "div#links a.result__url")
-    RESULT_LINKS = (By.XPATH, "//div[@id='links']//a[@class='result__url']")
+    RESULT_LINKS = (By.ID, "links_wrapper")
 
     def link_results(self):
         self.wait_for_element(self.RESULT_LINKS)
