@@ -5,7 +5,7 @@ from .base_page import BasePage
 class SearchPage(BasePage):
     URL = "https://duckduckgo.com/"
     SEARCH_INPUT = (By.ID, "searchbox_input")
-    SEARCH_BUTTON = (By.CLASS_NAME, "searchbox_searchButton__F5Bwq iconButton_button__6x_9C")
+    SEARCH_BUTTON = (By.XPATH, '//*[@id="searchbox_homepage"]/div/div/button')
 
     def load(self):
         self.driver.get(self.URL)
