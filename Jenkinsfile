@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'REPOSITORY_URL'
+                git 'https://github.com/Mujtaba-git/duckduckgo'
             }
         }
 
