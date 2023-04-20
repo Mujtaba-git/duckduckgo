@@ -8,15 +8,21 @@ pipeline {
             }
         }
 
-        stage('Install dependencies') {
+        stage('Create virtual environment') {
             steps {
-                bat 'pip install -r requirements.txt'
+                powershell 'python -m venv .venv'
+            }
+        }
+
+        stage('Activate virtual environment and install dependencies') {
+            steps {
+                powershell '.\\.venv\\Scripts\\Activate; pip install -r requirements.txt'
             }
         }
 
         stage('Run tests') {
             steps {
-                bat 'pytest --junitxml=report.xml'
+                powershell '.\\.venv\\Scripts\\Activate; pytest --junitxml=report.xml'
             }
         }
 
