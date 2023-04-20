@@ -2,6 +2,7 @@ import pytest
 from pages.search_page import SearchPage
 from pages.result_page import ResultPage
 
+
 class TestSearchDuckDuckGo:
     @pytest.mark.parametrize("query", ["Python", "Selenium", "Pytest"])
     def test_search_query(self, driver, query):

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from base_page import BasePage
 
+
 class SearchPage(BasePage):
     URL = "https://duckduckgo.com/"
     SEARCH_INPUT = (By.ID, "search_form_input_homepage")

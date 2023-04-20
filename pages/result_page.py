@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from base_page import BasePage
 
+
 class ResultPage(BasePage):
     RESULT_LINKS = (By.CSS_SELECTOR, "div#links a.result__url")
 
