@@ -16,7 +16,7 @@ def driver(request):
     if browser == "chrome":
         options = ChromeOptions()
         #options.headless = True
-        options.add_argument('--headless')
+        #options.add_argument('--headless')
         driver = webdriver.Remote(
             command_executor="http://localhost:4444/wd/hub",
             #desired_capabilities={"browserName": "chrome"},
@@ -25,7 +25,7 @@ def driver(request):
     elif browser == "firefox":
         options = FirefoxOptions()
         #options.headless = True
-        options.add_argument('--headless')
+        #options.add_argument('--headless')
         driver = webdriver.Remote(
             command_executor="http://localhost:4444/wd/hub",
             #desired_capabilities={"browserName": "firefox"},
