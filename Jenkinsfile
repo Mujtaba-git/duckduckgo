@@ -31,8 +31,8 @@ pipeline {
 
         stage('Run tests') {
             steps {
-            sh 'pytest --junitxml=report.xml --html=report.html'
-            }
+                powershell '.\\.venv\\Scripts\\Activate; pytest --junitxml=report.xml --html=report.html'
+             }
         }
 
         stage('Publish results') {
