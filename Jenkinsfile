@@ -23,15 +23,22 @@ pipeline {
             }
         }
 
+//         stage('Run tests') {
+//             steps {
+//                 powershell '.\\.venv\\Scripts\\Activate; pytest --junitxml=report.xml'
+//             }
+//         }
+
         stage('Run tests') {
             steps {
-                powershell '.\\.venv\\Scripts\\Activate; pytest --junitxml=report.xml'
+            sh 'pytest --junitxml=report.xml --html=report.html'
             }
         }
 
         stage('Publish results') {
             steps {
                 junit 'report.xml'
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'report.html', reportName: 'HTML Report'])
             }
         }
     }
